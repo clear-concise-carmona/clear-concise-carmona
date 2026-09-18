@@ -29,7 +29,7 @@ Start with one of these if you have a live Salesforce question to answer:
 | Repo | Purpose | Audience | Best first action |
 |---|---|---|---|
 | [NPSP to Nonprofit Cloud Field Map](https://github.com/clear-concise-carmona/npsp-to-nonprofit-cloud-field-map) | Field-level, confidence-tagged mapping between NPSP and Nonprofit Cloud objects | Admins and architects scoping an NPSP-to-Nonprofit-Cloud migration | Read the confidence column before trusting a row, then run `validate_org.py` against your own org |
-| [NPSP Migration Readiness Scanner](https://github.com/clear-concise-carmona/npsp-migration-readiness-scanner) | An `sf` CLI plugin that runs seven read-only checks and produces a 0-100 migration-readiness score | Admins and architects who need a number before committing to a migration timeline | Install the plugin and run it against a sandbox, not production |
+| [NPSP Migration Readiness Scanner](https://github.com/clear-concise-carmona/npsp-migration-readiness-scanner) | An `sf` CLI plugin that runs seven read-only checks and produces a 0-100 migration-readiness score | Admins and architects who need a number before committing to a migration timeline | Build and link the plugin from source, then run it against a sandbox, not production |
 | [Nonprofit Data Quality Scorecard](https://github.com/clear-concise-carmona/nonprofit-data-quality-scorecard) | Free Apex and Lightning Web Component package scoring 10 data-quality metrics, for either NPSP or Nonprofit Cloud | Admins and developers who want an ongoing, trackable data-quality number | Deploy to a sandbox and review the first Data Quality Dashboard score |
 | [Salesforce Nonprofit Templates](https://github.com/clear-concise-carmona/salesforce-nonprofit-templates) | Downloadable templates for project scoping, data-quality audits, and Salesforce career preparation | Nonprofit admins, project managers, and career changers | Download the template that matches the work in front of you |
 
@@ -70,7 +70,7 @@ For Salesforce Government Cloud work, begin with `awesome-salesforce-government-
 
 ## What to Expect
 
-These are maintained practical tools and reference materials, not substitutes for architecture review or compliance judgment. Where a tool connects to a Salesforce org, it is designed for sandbox-first, read-only assessment. Review each repository's assumptions, confidence tags, sources, supported conditions, and disclosed limitations before relying on a result. A score or scanner can identify questions and evidence. It does not certify compliance or make an implementation decision for you.
+These are maintained practical tools and reference materials, not substitutes for architecture review or compliance judgment. Tools that connect to a Salesforce org should be run sandbox-first. The migration scanner CLI and Agentforce governance assessment paths are designed for read-only assessment. The migration scanner's optional Apex batch writes `Migration_Readiness_Finding__c` records to its own custom object. The nonprofit data quality scorecard writes `Data_Quality_Snapshot__c` records to store score history. Review the read and write scope, assumptions, sources, and disclosed limitations in each repository before relying on a result. A score or scanner can identify questions and evidence. It does not certify compliance or make an implementation decision for you.
 
 ## For Nonprofits
 
@@ -78,7 +78,11 @@ You don't need to read code to get value here. Start with the free [AI Readiness
 
 ## For Salesforce Admins and Consultants
 
-Every tool here that touches a live org is read-only: describe calls, aggregate SOQL, and Tooling API queries. None of them write, update, or delete data. Run them in a sandbox, read the confidence tags and disclosed gaps in each README before you trust a result, and open an issue if a check doesn't match how migrations actually play out for you. Corrections and contributions are welcome.
+Review each repository's read and write scope before connecting it to an org. The migration scanner CLI and the Agentforce governance kit's assessment command are designed for read-only assessment: describe calls, aggregate SOQL, and Tooling API queries. The migration scanner's optional Apex batch is a separate, explicit deploy and does write `Migration_Readiness_Finding__c` records to its own custom object. The nonprofit data quality scorecard reads org data and writes `Data_Quality_Snapshot__c` records to store score history in its own package object.
+
+Run all tools in a sandbox first. Read the confidence tags, assumptions, source notes, and disclosed gaps in each README before relying on a result. None of these tools makes an implementation, security, or compliance decision for you.
+
+Open an issue if a check doesn't match how migrations actually play out for you. Corrections and contributions are welcome.
 
 ## Work with Clear Concise Consulting
 
